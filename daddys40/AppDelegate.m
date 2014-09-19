@@ -1,23 +1,25 @@
-//
-//  AppDelegate.m
-//  daddys40
-//
-//  Created by 이상현 on 2014. 9. 9..
-//  Copyright (c) 2014년 Tuna. All rights reserved.
-//
-
 #import "AppDelegate.h"
-
-@interface AppDelegate ()
-            
-
-@end
+#import "RootViewController.h"
+#import "SplashViewController.h"
 
 @implementation AppDelegate
-            
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    BOOL runningTests = NSClassFromString(@"XCTestCase") != nil;
+    if (runningTests) {
+        return YES;
+    }
+
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    RootViewController *rootViewController = [[RootViewController alloc]init];
+    
+    [_window setBackgroundColor:[UIColor redColor]];
+    [_window setRootViewController:rootViewController];
+    
+    [rootViewController pushViewController:[[SplashViewController alloc]init] animated:YES];
+    
+    [_window makeKeyAndVisible];
     return YES;
 }
 
